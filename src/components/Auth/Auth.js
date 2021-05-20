@@ -5,7 +5,7 @@ import { auth, start } from "../../store/actions/auth";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const { token, error } = useSelector(state => state.auth);
+  const { token, error, loading } = useSelector(state => state.auth);
   const [method, setMethod] = useState("signin");
 
   const submitCallback = (event) => {
@@ -35,8 +35,8 @@ const Auth = () => {
       <form onSubmit={submitCallback}>
         <input type="email" name="email" placeholder="Email" required />
         <input type="password" name="password" placeholder="Password" required />
-        <button onClick={() => setMethod("signin")}>Sign in</button>
-        <button onClick={() => setMethod("signup")}>Sign up</button>
+        <button onClick={() => setMethod("signin")} disabled={loading}>Sign in</button>
+        <button onClick={() => setMethod("signup")} disabled={loading}>Sign up</button>
       </form>
       {redirectOutput}
     </div>

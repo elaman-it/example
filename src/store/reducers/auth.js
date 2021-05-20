@@ -4,22 +4,26 @@ const initialState = {
   id: null,
   token: null,
   error: null,
+  loading: false
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_START:
       return {
-        ...initialState
+        ...initialState,
+        loading: true
       };
     case AUTH_SUCCESS:
       return {
         token: action.token,
-        id: action.id
+        id: action.id,
+        loading: false
       };
     case AUTH_FAIL:
       return {
-        error: action.error.message
+        error: action.error.message,
+        loading: false
       };
     case AUTH_LOGOUT:
       return {
