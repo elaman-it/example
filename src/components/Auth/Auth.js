@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 import { auth, start } from "../../store/actions/auth";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const error = useSelector(state => state.auth.error);
+  const { token, error } = useSelector(state => state.auth);
   const [method, setMethod] = useState("signin");
 
   const submitCallback = (event) => {
@@ -22,6 +23,11 @@ const Auth = () => {
     errorOutput = <h4 style={{ color: "red" }}>{error}</h4>;
   }
 
+  let redirectOutput = null;
+  if (token) {
+    redirectOutput = <Redirect to="/" />
+  }
+
   return (
     <div>
       <h1>Welcome</h1>
@@ -32,6 +38,7 @@ const Auth = () => {
         <button onClick={() => setMethod("signin")}>Sign in</button>
         <button onClick={() => setMethod("signup")}>Sign up</button>
       </form>
+      {redirectOutput}
     </div>
   );
 }
