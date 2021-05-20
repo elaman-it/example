@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
+import Logout from "./components/Logout/Logout";
 import Nav from "./components/Nav/Nav";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <Switch>
       <Route path="/" component={Home} exact />
       <Route path="/auth" component={Auth} />
+      <Route path="/logout" component={Logout} />
     </Switch>
   );
 

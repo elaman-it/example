@@ -1,4 +1,4 @@
-import { AUTH_FAIL, AUTH_SUCCESS, AUTH_START } from "../actions/types";
+import { AUTH_FAIL, AUTH_SUCCESS, AUTH_START, AUTH_LOGOUT } from "../actions/types";
 
 const initialState = {
   id: null,
@@ -20,6 +20,11 @@ const auth = (state = initialState, action) => {
     case AUTH_FAIL:
       return {
         error: action.error.message
+      };
+    case AUTH_LOGOUT:
+      return {
+        token: null,
+        id: null
       };
   
     default:
