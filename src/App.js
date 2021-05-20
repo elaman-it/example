@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import Logout from "./components/Logout/Logout";
 import Nav from "./components/Nav/Nav";
+import { restore } from "./store/actions/auth";
 
 function App() {
+  const disptach = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.token !== null);
+
+  useEffect(() => {
+    disptach(restore());
+  }, [disptach]);
 
   let output = (
     <Switch>

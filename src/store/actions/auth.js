@@ -17,9 +17,28 @@ export const start = () => ({
   type: AUTH_START
 });
 
-export const logout = () => ({
-  type: AUTH_LOGOUT
-});
+export const logout = () => {
+  localStorage.removeItem("localId");
+  localStorage.removeItem("idToken");
+
+  return {
+    type: AUTH_LOGOUT
+  };
+}
+
+export const restore = () => {
+  return (dispatch) => {
+    const idToken = localStorage.getItem('idToken');
+    const localId = localStorage.getItem('localId');
+
+    if (idToken && localId) {
+      success(dispatch, { idToken, localId });
+    }
+    else {
+      dispatch(logout());
+    }
+  };
+};
 
 const key = "AIzaSyBmNRW4Dy30bYbbVl7kHd3d_HbPTh4o9R8";
 export const auth = (method, email, password) => {
@@ -33,6 +52,9 @@ export const auth = (method, email, password) => {
 
   return (dispatch) => axios.post(url + key, data)
     .then(({ data }) => {
+      localStorage.setItem("idToken", data.idToken);
+      localStorage.setItem("localId", data.localId);
+
       dispatch(success(data));
     })
     .catch(error => {
