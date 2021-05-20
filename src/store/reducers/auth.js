@@ -1,4 +1,4 @@
-import { AUTH_FAIL, AUTH_SUCCESS } from "../actions/types";
+import { AUTH_FAIL, AUTH_SUCCESS, AUTH_START } from "../actions/types";
 
 const initialState = {
   id: null,
@@ -8,6 +8,10 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_START:
+      return {
+        ...initialState
+      };
     case AUTH_SUCCESS:
       return {
         token: action.token,

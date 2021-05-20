@@ -1,6 +1,6 @@
 
 import axios from "axios"
-import { AUTH_SUCCESS, AUTH_FAIL } from "./types";
+import { AUTH_SUCCESS, AUTH_FAIL, AUTH_START } from "./types";
 
 export const success = (data) => ({
   type: AUTH_SUCCESS,
@@ -11,6 +11,10 @@ export const success = (data) => ({
 export const fail = (data) => ({
   type: AUTH_FAIL,
   error: data.error
+});
+
+export const start = () => ({
+  type: AUTH_START
 });
 
 const key = "AIzaSyBmNRW4Dy30bYbbVl7kHd3d_HbPTh4o9R8";
